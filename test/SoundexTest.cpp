@@ -52,3 +52,7 @@ TEST_F(SoundexEncoding, IgnoresCaseWhenEncodingConsonants) {
 TEST_F(SoundexEncoding, CombinesDuplicateCodesWith2ndLetterDuplicate1st) {
     EXPECT_EQ(soundex.encode("Bbcd"), "B230");
 }
+
+TEST_F(SoundexEncoding, DoesNotCombineDuplicateEncodingsSeparatedByVowel) {
+    EXPECT_EQ(soundex.encode("Jbob"), "J110");
+}
