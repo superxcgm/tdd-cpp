@@ -7,8 +7,11 @@ class Soundex {
 
 public:
     std::string encode(const std::string &word) const {
-        return "A";
+        return zeroPad(word);
     }
+
+private:
+    std::string zeroPad(const std::string &word) const { return word + "000"; }
 };
 
 TEST(SoundexEncoding, RetainSoleLetterOfOneLetterWord) {
@@ -16,5 +19,13 @@ TEST(SoundexEncoding, RetainSoleLetterOfOneLetterWord) {
 
     auto encoded = soundex.encode("A");
 
-    EXPECT_EQ(encoded, "A");
+    EXPECT_EQ(encoded, "A000");
+}
+
+TEST(SoundexEncoding, PadsWithZerosToEnsureThreeDigits) {
+    Soundex soundex;
+
+    auto encoded = soundex.encode("I");
+
+    EXPECT_EQ(encoded, "I000");
 }
