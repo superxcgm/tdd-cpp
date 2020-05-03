@@ -15,7 +15,7 @@ public:
 
 private:
     std::string encodedDigits(const std::string &word) const {
-        if (word.length() > 1) return encodedDigit();
+        if (word.length() > 1) return encodedDigit(word[1]);
         return "";
     }
 
@@ -23,7 +23,10 @@ private:
         return word.substr(0, 1);
     }
 
-    std::string encodedDigit() const {
+    std::string encodedDigit(char letter) const {
+        if (letter == 'c') {
+            return "2";
+        }
         return "1";
     }
 
