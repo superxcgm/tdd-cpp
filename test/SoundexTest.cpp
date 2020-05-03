@@ -24,3 +24,7 @@ TEST_F(SoundexEncoding, ReplaceFuYinWithDigit) {
 TEST_F(SoundexEncoding, IgnoreNonAlphabetics) {
     EXPECT_EQ(soundex.encode("A#"), "A000");
 }
+
+TEST_F(SoundexEncoding, ReplacesMultipleConsonantsWithDigits) {
+    EXPECT_EQ(soundex.encode("Acdl"), "A234");
+}
