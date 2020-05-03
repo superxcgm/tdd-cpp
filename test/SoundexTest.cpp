@@ -28,3 +28,7 @@ TEST_F(SoundexEncoding, IgnoreNonAlphabetics) {
 TEST_F(SoundexEncoding, ReplacesMultipleConsonantsWithDigits) {
     EXPECT_EQ(soundex.encode("Acdl"), "A234");
 }
+
+TEST_F(SoundexEncoding, LimitsLengthToFourCharacters) {
+    EXPECT_EQ(soundex.encode("Dcdlb").length(), 4);
+}
