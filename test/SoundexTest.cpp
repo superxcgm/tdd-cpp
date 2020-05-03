@@ -34,9 +34,13 @@ TEST_F(SoundexEncoding, LimitsLengthToFourCharacters) {
 }
 
 TEST_F(SoundexEncoding, IgnoreVowelLikeLetters) {
-    EXPECT_EQ(soundex.encode("Baeiouhycdl"), "B234");
+    EXPECT_EQ(soundex.encode("BaAeEiIoOuUhHyYcdl"), "B234");
 }
 
 TEST_F(SoundexEncoding, CombinesDuplicateEncodings) {
     EXPECT_EQ(soundex.encode("Abfcgdt"), "A123");
+}
+
+TEST_F(SoundexEncoding, UppercasesFirstLetter) {
+    EXPECT_EQ(soundex.encode("abcd").substr(0, 1), "A");
 }
