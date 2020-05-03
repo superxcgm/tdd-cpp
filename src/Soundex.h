@@ -81,8 +81,11 @@ private:
 
                 {'r', "6"}
         };
-        auto it = encodings.find(letter);
+        auto it = encodings.find(lower(letter));
         return it == encodings.end() ? NotADigit : it->second;
+    }
+    char lower(char c) const {
+        return std::tolower(c);
     }
 
     static const size_t MaxCodeLength{4};

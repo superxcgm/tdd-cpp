@@ -44,3 +44,7 @@ TEST_F(SoundexEncoding, CombinesDuplicateEncodings) {
 TEST_F(SoundexEncoding, UppercasesFirstLetter) {
     EXPECT_EQ(soundex.encode("abcd").substr(0, 1), "A");
 }
+
+TEST_F(SoundexEncoding, IgnoresCaseWhenEncodingConsonants) {
+    EXPECT_EQ(soundex.encode("BCDL"), soundex.encode("Bcdl"));
+}
