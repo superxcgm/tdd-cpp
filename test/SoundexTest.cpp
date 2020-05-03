@@ -32,3 +32,7 @@ TEST_F(SoundexEncoding, ReplacesMultipleConsonantsWithDigits) {
 TEST_F(SoundexEncoding, LimitsLengthToFourCharacters) {
     EXPECT_EQ(soundex.encode("Dcdlb").length(), 4);
 }
+
+TEST_F(SoundexEncoding, IgnoreVowelLikeLetters) {
+    EXPECT_EQ(soundex.encode("Baeiouhycdl"), "B234");
+}
