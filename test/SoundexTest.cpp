@@ -20,3 +20,7 @@ TEST_F(SoundexEncoding, PadsWithZerosToEnsureThreeDigits) {
 TEST_F(SoundexEncoding, ReplaceFuYinWithDigit) {
     EXPECT_EQ(soundex.encode("Ax"), "A200");
 }
+
+TEST_F(SoundexEncoding, IgnoreNonAlphabetics) {
+    EXPECT_EQ(soundex.encode("A#"), "A000");
+}
