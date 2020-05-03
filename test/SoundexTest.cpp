@@ -14,17 +14,18 @@ private:
     std::string zeroPad(const std::string &word) const { return word + "000"; }
 };
 
-TEST(SoundexEncoding, RetainSoleLetterOfOneLetterWord) {
+class SoundexEncoding: public testing::Test {
+public:
     Soundex soundex;
+};
 
+TEST_F(SoundexEncoding, RetainSoleLetterOfOneLetterWord) {
     auto encoded = soundex.encode("A");
 
     EXPECT_EQ(encoded, "A000");
 }
 
-TEST(SoundexEncoding, PadsWithZerosToEnsureThreeDigits) {
-    Soundex soundex;
-
+TEST_F(SoundexEncoding, PadsWithZerosToEnsureThreeDigits) {
     auto encoded = soundex.encode("I");
 
     EXPECT_EQ(encoded, "I000");
