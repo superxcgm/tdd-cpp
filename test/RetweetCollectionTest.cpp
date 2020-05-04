@@ -20,15 +20,19 @@ TEST_F(ARetweetCollection, HasSizeZeroWhenCreated) {
     ASSERT_EQ(collection.size(), 0);
 }
 
-TEST_F(ARetweetCollection, IsNoLongerEmptyAfterTweetAdded) {
-    collection.add(Tweet());
+class ARetweetCollectionWithOneTweet: public Test {
+public:
+    RetweetCollection collection;
+    void SetUp() override {
+        collection.add(Tweet());
+    }
+};
 
+TEST_F(ARetweetCollectionWithOneTweet, IsNoLongerEmptyAfterTweetAdded) {
     ASSERT_FALSE(collection.isEmpty());
 }
 
-TEST_F(ARetweetCollection, HasSizeOneAfterTweetAdded) {
-    collection.add(Tweet());
-
+TEST_F(ARetweetCollectionWithOneTweet, HasSizeOneAfterTweetAdded) {
     ASSERT_EQ(collection.size(), 1);
 }
 
