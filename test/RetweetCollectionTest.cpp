@@ -2,6 +2,7 @@
 // Created by Yujia Li on 2020/5/4.
 //
 #include "gtest/gtest.h"
+#include "gmock/gmock.h"
 #include "RetweetCollection.h"
 #include "Tweet.h"
 
@@ -38,6 +39,7 @@ TEST_F(ARetweetCollectionWithOneTweet, IsNoLongerEmptyAfterTweetAdded) {
 
 TEST_F(ARetweetCollectionWithOneTweet, HasSizeOneAfterTweetAdded) {
     ASSERT_EQ(collection.size(), 1);
+    EXPECT_THAT(1, Eq(1)); // hamcrest style
 }
 
 TEST_F(ARetweetCollectionWithOneTweet, IgnoresDuplicateTweetAdded) {
