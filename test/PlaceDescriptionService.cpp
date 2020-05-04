@@ -49,6 +49,7 @@ private:
 };
 
 TEST_F(APlaceDescriptionService, MakesHttpResquestToObtainAddress) {
+    testing::InSequence forceExpectationOrder;
     HttpStub httpStub;
     std::string urlStart{
             "http://open.mapquestapi.com/nominatim/v1/reverse?format=json&"
