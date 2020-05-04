@@ -23,17 +23,12 @@ TEST_F(ARetweetCollection, HasSizeZeroWhenCreated) {
 class ARetweetCollectionWithOneTweet : public Test {
 public:
     RetweetCollection collection;
-    Tweet *tweet;
+    std::shared_ptr<Tweet> tweet;
 
 protected:
     void SetUp() override {
-        tweet = new Tweet("msg", "@user");
+        tweet = std::shared_ptr<Tweet>(new Tweet("msg", "@user"));
         collection.add(*tweet);
-    }
-
-    void TearDown() override {
-        delete tweet;
-        tweet = nullptr;
     }
 };
 
