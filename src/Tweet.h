@@ -8,14 +8,23 @@
 
 #include <string>
 
+class InvalidUserException: public std::exception{
+
+};
+
 class Tweet {
 
 public:
     Tweet() = default;
 
-    Tweet(const std::string &message, const std::string &user) {
-        message_ = message;
-        user_ = user;
+    Tweet(const std::string &message, const std::string &user) : message_(message), user_(user) {
+        if (!isValid(user_)) {
+            throw InvalidUserException();
+        }
+    }
+
+    bool isValid(const std::string &user) const {
+        return '@' == user[0];
     }
 
     bool operator==(const Tweet &rhs) const {
