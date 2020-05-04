@@ -31,7 +31,12 @@ public:
                           KeyValue("format", "json") + "&" +
                           KeyValue("lat", latitude) + "&" +
                           KeyValue("lon", longitude);
-        http->get(url);
+        http->initialize();
+        auto response = http->get(url);
+
+//        AddressExtractor extractor;
+//        auto address = extractor.addressFrom(response);
+//        return address.summaryDescription();
         return "";
     }
 
@@ -51,8 +56,26 @@ TEST_F(APlaceDescriptionService, MakesHttpResquestToObtainAddress) {
     auto expectURL = urlStart +
                      "lat=" + APlaceDescriptionService::ValidLatitude + "&" +
                      "lon=" + APlaceDescriptionService::ValidLongitude;
+    EXPECT_CALL(httpStub, initialize());
     EXPECT_CALL(httpStub, get(expectURL));
     PlaceDescriptionService service{&httpStub};
 
     service.summaryDescription(ValidLatitude, ValidLongitude);
+}
+
+TEST_F(APlaceDescriptionService, DISABLED_FormatsRetrievedAddressIntoSummaryDescription) {
+    HttpStub httpStub;
+    EXPECT_CALL(httpStub, get(testing::_))
+            .WillOnce(testing::Return(
+                    R"({
+  "address": {
+    "road": "Drury Ln",
+    "city": "Fountain",
+    "state": "CO",
+    "country": "US"
+  }
+})"));
+    PlaceDescriptionService service(&httpStub);
+    auto description = service.summaryDescription(ValidLatitude, ValidLongitude);
+    ASSERT_THAT(description, testing::Eq("Drury Ln, Fountain, CO, US"));
 }
