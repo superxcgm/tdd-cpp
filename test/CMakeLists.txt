@@ -9,5 +9,7 @@ find_package(Threads REQUIRED)
 aux_source_directory(. TEST_FILES)
 add_executable(tests ${TEST_FILES})
 
-target_link_libraries(tests tdd_cpp ${GTEST_BOTH_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+set(GMOCK_LIBS /usr/local/lib/libgmock.a /usr/local/lib/libgmock_main.a)
+
+target_link_libraries(tests tdd_cpp ${GTEST_BOTH_LIBRARIES} ${GMOCK_LIBS} ${CMAKE_THREAD_LIBS_INIT})
 gtest_discover_tests(tests)
