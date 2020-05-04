@@ -26,6 +26,12 @@ TEST_F(ARetweetCollection, IsNoLongerEmptyAfterTweetAdded) {
     ASSERT_FALSE(collection.isEmpty());
 }
 
+TEST_F(ARetweetCollection, HasSizeOneAfterTweetAdded) {
+    collection.add(Tweet());
+
+    ASSERT_EQ(collection.size(), 1);
+}
+
 TEST_F(ARetweetCollection, IgnoresDuplicateTweetAdded) {
     Tweet tweet("msg", "@user");
     Tweet duplicate(tweet);
